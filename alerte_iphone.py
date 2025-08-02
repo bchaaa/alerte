@@ -18,15 +18,13 @@ def send_discord_message(message):
 def main():
     driver = None
     try:
-        driver = uc.Chrome()
+        options = uc.ChromeOptions()
+        options.headless = True
+        driver = uc.Chrome(options=options)
         driver.get(URL)
 
         wait = WebDriverWait(driver, 15)
-        prix_element = wait.until(
-            EC.visibility_of_element_located(
-                (By.CSS_SELECTOR, "span[data-qa='productpage-product-price']")
-            )
-        )
+        prix_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "span[data-qa='productpage-product-price']")))
         prix = prix_element.text
 
         print(f"Prix trouvé : {prix}")
