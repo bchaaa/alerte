@@ -1,0 +1,27 @@
+name: Alerte iPhone toutes les heures
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # toutes les heures pile
+  workflow_dispatch:     # permet de lancer manuellement depuis GitHub
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install undetected-chromedriver selenium requests
+
+    - name: Run script
+      run: python alerte_iphone.py
