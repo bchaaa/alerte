@@ -3,7 +3,7 @@ name: Alerte iPhone toutes les heures
 on:
   schedule:
     - cron: '0 * * * *'  # toutes les heures pile
-  workflow_dispatch:     # pour lancer manuellement
+  workflow_dispatch:     # permet lancement manuel
 
 jobs:
   run-script:
@@ -13,10 +13,10 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Install Google Chrome
+    - name: Install Chrome
       run: |
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        sudo apt install -y ./google-chrome-stable_current_amd64.deb
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
 
     - name: Setup Python 3.11
       uses: actions/setup-python@v4
